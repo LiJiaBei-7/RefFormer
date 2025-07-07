@@ -5,7 +5,7 @@ source code of our paper [Referencing Where to Focus: Improving Visual Grounding
 ![image](framework.png)
 
 ### Dataset
-- RefCOCO
+- RefCOCO/+/g
 - Flickr30K
 - ReferItGame
 
