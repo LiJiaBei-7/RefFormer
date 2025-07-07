@@ -1,0 +1,13 @@
+ruamel.yaml<0.17
+timm
+transformers
+ftfy
+einops
+opencv-python
+scipy
+lmdb
+pyarrow==11.0.0
+h5py
+pickle5
+mmcv-full==1.3.12
+mmsegmentation

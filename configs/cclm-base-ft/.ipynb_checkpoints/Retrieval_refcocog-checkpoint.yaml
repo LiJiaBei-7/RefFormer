@@ -1,0 +1,79 @@
+# All-Language Finetune
+#train_file: '/home/wyb/wyb/workspace/VisualSearch/multi30k/TextData/Flickr30ktrain_enc.caption.txt' #['data/finetune/multi30k/train.en.json']
+train_file: 'data/anns/refcocog_umd.json'
+# '/home/ma-user/work/workspace/code/VG/CCLM_DETR/detr/detr_predict_img_bbox_mscoco_0.9.txt'
+# '/home/ma-user/work/workspace/code/VG/CCLM_DETR/detr/detr_predict_img_bbox.txt'
+# '/home/ma-user/work/workspace/dataset/VG/refcocog/refcocog(umd)_train.txt' #['data/finetune/multi30k/train.en.json']
+
+val_file: {
+           'en': 'data/anns/refcocog_umd.json',
+          # 'en': '/home/ma-user/work/workspace/code/VG/CCLM_DETR/detr/test_detr_predict_img_bbox_mscoco_0.9.txt'
+            # 'en': '/home/ma-user/work/workspace/code/WRef/RefCLIP/data/anns/refcoco_unc.json',
+}
+
+test_file: {
+          #  'en': '/mnt/workspace/VisualSearch/VG/refcocog/refcocog(umd)_test.txt',
+          'en': 'data/anns/refcocog_umd.json',
+          # 'en': '/home/ma-user/work/workspace/code/VG/CCLM_DETR/detr/test_detr_predict_img_bbox_mscoco_0.9.txt',
+}
+
+
+image_root: '/home/ma-user/work/workspace/dataset/mscoco/all_pics'
+
+loss_bbox_weight: 3
+loss_giou_weight: 1
+
+
+
+detector: detr #detr # fasterrcnn
+
+## Vision Encoder
+vision_config: 'configs/config_swinB_384.json'
+# vision_config: '/mnt/workspace/code_space/VG/CCLM/configs/config_clip_base_16.json'
+# clip_config: 'ViT-B/16'
+# clip_config: '/mnt/workspace/VisualSearch/clip_data/ViT-B-16.pt'
+
+text_encoder: clip #robert
+
+use_clip_vit: False
+image_res: 640 #512 #224
+patch_size: 32
+hidden_dim: 512
+vision_width: 256
+text_width: 512
+
+use_swin: True
+# image_res: 384
+# patch_size: 32
+
+## Text Encoder (& Cross Encoder)
+# text_encoder: 'data/xlm-roberta-large'
+text_num_hidden_layers: 12
+
+
+
+## Training
+use_one_cl_proj_only: False
+
+batch_size_train: 10
+batch_size_test: 32
+batch_size_test_text: 32
+max_tokens: 40
+embed_dim: 512
+temp: 0.07
+k_test: 128
+num_queries: 5
+
+## Other Settings
+# optimizer: {opt: adamW, lr: 3e-5, weight_decay: 0.01, lr_mult: 2}
+# schedular: {sched: linear, lr: 3e-5, epochs: 10, num_warmup_steps: 0.1}
+
+# ckpt_frequent_step: 50000
+# ckpt_frequent: 5  # epoch
+# optimizer: {opt: adamW, lr: 1e-4, weight_decay: 0.01, lr_mult: 2}
+# schedular: {sched: linear, lr: 1e-4, epochs: 30, num_warmup_steps: 2500}
+# accelerator: {SYNCBN: false, FP16_OPT_LEVEL: O1, FP16_LOSS_SCALE: dynamic, RNG_SEED: 42, GRAD_ACCUMULATE_STEPS: 1, CLIP_GRAD_NORM: 1.0}
+
+optimizer: {opt: adamW, lr: 1e-4, weight_decay: 0.01, lr_mult: 2}
+schedular: {sched: linear, lr: 1e-4, epochs: 10, num_warmup_steps: 0.1}
+

@@ -1,0 +1,77 @@
+train_file: ['/mnt_rela/wangyabing.wyb/datasets/vg_datasets/VG/vg_all.pth']
+
+
+# val_file: {
+#           # 'val': '/mnt_rela/wangyabing.wyb/datasets/vg_datasets/anns/refcocog_umd.json',
+#           'test': '/mnt_rela/wangyabing.wyb/datasets/vg_datasets/anns/refcocog_umd.json',
+# }
+
+# test_file: {
+#           # 'val': '/mnt_rela/wangyabing.wyb/datasets/vg_datasets/anns/refcocog_umd.json',
+#           'test': '/mnt_rela/wangyabing.wyb/datasets/vg_datasets/anns/refcocog_umd.json',
+# }
+
+
+image_root: 'pcache://mmodalmastertwoproxy-pool.cz50c.alipay.com:39999/mnt/e6907b4b11a9bf76f739ed442b0281ab'
+
+loss_bbox_weight: 3
+loss_giou_weight: 1
+
+bridger_stages: [3,5,7,9,11]
+aggregate_layers: [3,9] #默认包含了最后一层 即11-layer  [3,9]
+num_reg: 3
+vit_type: vit_16
+
+
+
+detector: detr #detr # fasterrcnn
+
+## Vision Encoder
+vision_config: 'configs/config_swinB_384.json'
+# vision_config: '/mnt/workspace/code_space/VG/CCLM/configs/config_clip_base_16.json'
+# clip_config: 'ViT-B/16'
+# clip_config: '/mnt/workspace/VisualSearch/clip_data/ViT-B-16.pt'
+
+text_encoder: clip #robert
+
+use_clip_vit: False
+image_res: 640 #512 #224
+patch_size: 32
+hidden_dim: 512
+vision_width: 256
+text_width: 512
+
+use_swin: True
+# image_res: 384
+# patch_size: 32
+
+## Text Encoder (& Cross Encoder)
+# text_encoder: 'data/xlm-roberta-large'
+text_num_hidden_layers: 12
+
+
+
+## Training
+use_one_cl_proj_only: False
+
+batch_size_train: 32
+batch_size_test: 32
+batch_size_test_text: 32
+max_tokens: 50
+embed_dim: 512
+temp: 0.07
+k_test: 128
+
+## Other Settings
+# optimizer: {opt: adamW, lr: 3e-5, weight_decay: 0.01, lr_mult: 2}
+# schedular: {sched: linear, lr: 3e-5, epochs: 10, num_warmup_steps: 0.1}
+
+# ckpt_frequent_step: 50000
+# ckpt_frequent: 5  # epoch
+# optimizer: {opt: adamW, lr: 1e-4, weight_decay: 0.01, lr_mult: 2}
+# schedular: {sched: linear, lr: 1e-4, epochs: 30, num_warmup_steps: 2500}
+# accelerator: {SYNCBN: false, FP16_OPT_LEVEL: O1, FP16_LOSS_SCALE: dynamic, RNG_SEED: 42, GRAD_ACCUMULATE_STEPS: 1, CLIP_GRAD_NORM: 1.0}
+
+optimizer: {opt: adamW, lr: 5e-4, weight_decay: 0.01, lr_mult: 2}
+schedular: {sched: linear, lr: 5e-4, epochs: 10, num_warmup_steps: 0.1}
+accelerator: {SYNCBN: false, FP16_OPT_LEVEL: O1, FP16_LOSS_SCALE: dynamic, RNG_SEED: 42, GRAD_ACCUMULATE_STEPS: 1, CLIP_GRAD_NORM: 1.0}
