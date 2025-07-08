@@ -8,7 +8,7 @@ RefFormer consists of the query adaption module that can be seamlessly integrate
 ![image](framework.png)
 
 ### Dataset
-- RefCOCO/+/g ([BaiduPan-pwd:zqa7](https://pan.baidu.com/s/1Qi_jbR3kU6z2d7649MLu-A?pwd=zqa7))
+- RefCOCO/+/g ([BaiduPan-pwd:zqa7](https://pan.baidu.com/s/1Qi_jbR3kU6z2d7649MLu-A?pwd=zqa7)), the pictures are from the MSCOCO2014.
 - Flickr30K
 - ReferItGame
 
